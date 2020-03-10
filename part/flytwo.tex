@@ -1,0 +1,108 @@
+\chapter{傅里叶变换解调原理研究}
+多光束干涉原理，反射光的光强分布为
+\begin{equation}
+I_r=\frac{2R(1-cos\frac{4\pi l}{\lambda})}{1+R^2-2Rcos\frac{4\pi l}{\lambda}}
+\label{1}
+\end{equation}
+可以用双光束干涉代替多光束干涉 ,此时
+$$1+R^{2}-2Rcos\frac{4\pi l}{\lambda}\approx1$$
+式\ref{1}为：
+\begin{equation}
+I_r=2R\left[1-cos(\frac{4\pi}{\lambda}l) \right ]I_{0}
+\label{2}
+\end{equation}
+由于光波长 $\lambda$、光频率$v$和光速$c$之间存在如下关系
+\begin{equation}
+v=\frac{c}{\lambda}
+\label{3}
+\end{equation}
+将式\ref{3}代入式\ref{2}，则有
+\begin{equation}
+I_{r}=2R\left[1-cos(\frac{4\pi vl}{c}) \right ]I_{0}
+\end{equation}
+在工程实际应用中 ,理想宽带光源是不存在的,任何一种实际光源所发出的光中各波长的强度是不同的,其强度随波长的分布呈近似高斯分布,其表达式为
+\begin{equation}
+I_{0}(\lambda)=I_{0}e^{-\frac{(\lambda-\lambda_{p})^{2}}{B^{2}_{\lambda}}}
+\label{5}
+\end{equation}
+式中,，$\lambda_{p}$ 是光源光谱的峰值波长,，$B_{\lambda}$是光源光谱带宽所决定的高斯函数的半宽度.当峰值波长$\lambda_{p}=825 nm$，光谱半宽度$B_{\lambda}=40 nm$。将式\ref{5}代入式\ref{2},，可以得到实际光源条件下 ；光纤法-珀传感器双光束干涉输出光强表达式为
+\begin{equation}
+I_{r}(\lambda)=2RI_{0}\left[1-cos(\frac{4\pi l}{\lambda}) \right ]e^{-\frac{(\lambda-\lambda_{p})^{2}}{B^{2}_{\lambda}}}
+\label{6}
+\end{equation}
+$v=\frac{c}{\lambda}$代入式\ref{5}，则式\ref{5}变为
+\begin{equation}
+I_{0}(v)=I_{0}e^{\frac{(v-v_{p})^{2}}{-2(\sigma_{\lambda}vv_{p}/c)^{2}}}
+\label{7}
+\end{equation}
+式中，$v_{p}=c/\lambda_{p}$，$\sigma_{\lambda}=\frac{B}{\sqrt{2}}$，也就是说实际光源强度对光频率$ v$来说已不是高斯分布, 如果将上式中指数部分的变量展开为泰勒级数
+\begin{equation}
+\frac{v-v_{p}}{v}=\frac{v-v_{p}}{v_{p}}-\frac{(v-v_{0})^{2}}{v_p}+\cdots\cdots=\frac{v-v_{p}}{v_{p}}(1-\frac{v-v_{p}}{v_{p}}+\cdots\cdots)
+\end{equation}
+取一阶近似,代入式\ref{7}, 得
+\begin{equation}
+I_{0}(v)=I_{0}exp\left[-\frac{(v-v_{p})^{2}}{2\sigma_{v^{2}}} \right ]
+\end{equation}
+式中 ，$\sigma_{v}=\frac{\sigma_{\lambda}v_{p}}{c}$显然，高斯光源强度对光频率$v$仍可近似成高斯分布, 其傅里叶变换为
+\begin{equation}
+F\left[I_{0}(v) \right ]=\sqrt{2\pi}\sigma_{v}I_{0}exp(-jv_{p}\Omega)\cdot exp(-\sigma_{v}^{2}\Omega^{2}/2)
+\end{equation}
+根据傅里叶变换的卷积定理
+\begin{equation}
+F\left[f_{1}(t)f_{2}(t) \right ]=\frac{1}{2\pi}F_{1}(j\Omega)*F_{2}(j\Omega)
+\end{equation}
+式\ref{6}的傅里叶变换为
+\begin{equation}
+\begin{aligned}
+ \mathscr{F}(j\Omega)=&2\sqrt{2\pi}RI_{0}\sigma_{v}\left[exp(-jv_{p}\Omega)exp(\frac{-\sigma_{v}^{2}\Omega^{2}}{2}) \right ]+ \\ 
+ &  \sqrt{2\pi}RI_{0}\sigma_{v}\left\{exp\left[-j(\Omega-\frac{4\pi l}{c}v_{p}) \right ]exp\left[-\frac{\sigma^{2}_{v}(\Omega-\frac{4\pi l}{c})^{2}}{2} \right ] \right\}+ \\ 
+ &  \sqrt{2\pi}RI_{0}\sigma_{v}\left\{exp\left[-j(\Omega+\frac{4\pi l}{c})v_{p} \right ]exp\left[-\frac{\sigma^{2}_{v}(\Omega+\frac{4\pi l}{c})^{2}}{2} \right ] \right\}
+\end{aligned}
+\end{equation}
+\section{高斯函数的傅里叶变换}
+\begin{equation}
+\begin{aligned}
+f(t)&=e^{-\pi t^{2}}\\
+F(u)&=\int^{\infty}_{-\infty}e^{-\pi t^{2}}exp(-j2\pi ut)dt\\
+&=\int^{\infty}_{-\infty}e^{-\pi(t^{2}+j2ut)}dt\\
+&=\int^{\infty}_{-\infty}e^{-\pi((t+ju)^{2}-(ju)^{2})}dt\\
+&=\int^{\infty}_{-\infty}e^{-\pi u^{2}}e^{-\pi(t+ju)^{2}}dt\\
+&=e^{-\pi u^{2}}\int^{\infty}_{-\infty}e^{-\pi(t+ju)^{2}}dt\\
+&=e^{-\pi u^{2}}\int^{\infty}_{-\infty}e^{-\pi(t+ju)^{2}}d(t+ju)\\
+&=e^{-\pi u^{2}}
+\end{aligned}
+\end{equation}
+\newpage
+\begin{proof}
+\begin{equation}
+I_{0}(v)=I_{0}e^{-\frac{(v-v_{p})^{2}}{2\sigma_{v}^{2}}}
+\end{equation}
+\begin{equation}
+I_{r}(v)=2R\left[1-cos\frac{4\pi lv}{c}\right]I_{0}(v)
+\end{equation}
+\begin{equation}
+F\left[I_{r}(v)\right]=\int_{-\infty}^{\infty}2RI_{0}\left[1-cos\frac{4\pi lv}{c}\right]e^{-\frac{(v-v_{p})^{2}}{2\sigma_{v}^{2}}}e^{-j\Omega v}dv
+\end{equation}
+\begin{equation}
+=2RI_{0}\left\{\int_{-\infty}^{\infty}e^{-\left[\frac{(v-v_{p})^{2}}{2\sigma_{v}^{2}}+j\Omega v \right]}dv-\int_{-\infty}^{\infty}cos\frac{4\pi lv}{c}e^{-\left[\frac{(v-v_{p})^{2}}{2\sigma_{v}^{2}}+j\Omega v \right]}dv \right\}
+\end{equation}
+\begin{equation}
+cos\frac{4\pi lv}{c}=\frac{e^{j\frac{4\pi lv}{c}}+e^{-j\frac{4\pi lv}{c}}}{2}
+\end{equation}
+\begin{equation}
+\begin{aligned}
+=&2RI_{0}e^{-j\Omega v_{p}}e^{-\sigma_{v}^{2}\Omega^{2}} \int_{-\infty}^{\infty}e^{-\frac{(v-v_{p}+j\sigma_{v}\Omega)^{2}}{2\sigma_{v}^{2}}}d(v-v_{p}+i\sigma_{v}\Omega)-\\
+&RI_{0}\int_{-\infty}^{\infty}e^{j\frac{4\pi lv}{c}}e^{-\left[\frac{(v-v_{p})^{2}}{2\sigma_{v}^{2}}+j\Omega v \right]}dv+\int_{-\infty}^{\infty}e^{-j\frac{4\pi lv}{c}}e^{-\left[\frac{(v-v_{p})^{2}}{2\sigma_{v}^{2}}+j\Omega v \right]}dv\\
+=&2\sqrt{2\pi}RI_{0}\sigma_{v}e^{-j\Omega v_{p}}e^{-\frac{\sigma_{v}^{2}\Omega^{2}}{2}}+\\
+&RI_{0}\int_{-\infty}^{\infty}e^{-\frac{\left[v-v_{p}+\sigma_{v}^{2}j(\Omega-\frac{4\pi l}{c}) \right]^{2}}{2\sigma_{v}^{2}}}d(v-v_{p}+\sigma_{v}^{2}j(\Omega-\frac{4\pi l}{c}))e^{-\frac{-\sigma_{v}^{2}(\Omega-\frac{4\pi l}{c})^{2}}{2}}e^{-v_{p}j(\Omega-\frac{4\pi l}{c})}+\\
+&RI_{0}\int_{-\infty}^{\infty}e^{-\frac{\left[v-v_{p}+\sigma_{v}^{2}j(\Omega+\frac{4\pi l}{c}) \right]^{2}}{2\sigma_{v}^{2}}}d(v-v_{p}+\sigma_{v}^{2}j(\Omega+\frac{4\pi l}{c}))e^{-\frac{-\sigma_{v}^{2}(\Omega+\frac{4\pi l}{c})^{2}}{2}}e^{-v_{p}j(\Omega+\frac{4\pi l}{c})}
+\end{aligned}
+\end{equation}
+\begin{equation}
+\begin{aligned}
+ \mathscr{F}\left[I_{r}(v)\right]=&2\sqrt{2\pi}RI_{0}\sigma_{v}e^{-j\Omega v_{p}}e^{-\frac{\sigma_{v}^{2}\Omega^{2}}{2}}+\\
+ &  \sqrt{2\pi}RI_{0}\sigma_{v}\left\{exp\left[-j(\Omega-\frac{4\pi l}{c}v_{p}) \right ]exp\left[-\frac{\sigma^{2}_{v}(\Omega-\frac{4\pi l}{c})^{2}}{2} \right ] \right\}+ \\ 
+ &  \sqrt{2\pi}RI_{0}\sigma_{v}\left\{exp\left[-j(\Omega+\frac{4\pi l}{c})v_{p} \right ]exp\left[-\frac{\sigma^{2}_{v}(\Omega+\frac{4\pi l}{c})^{2}}{2} \right ] \right\}
+\end{aligned}
+\end{equation}
+\end{proof}

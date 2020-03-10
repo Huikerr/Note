@@ -1,0 +1,68 @@
+\chapter{贝塞尔函数}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%贝塞尔函数的引出
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{贝塞尔函数的引出}
+\begin{equation}
+\begin{aligned}
+&\left\{\begin{array}{ll}
+{\frac{\partial u}{\partial t}=a^{2} \nabla^{2} u=a^{2}\left(\frac{\partial^{2} u}{\partial \rho^{2}}+\frac{1}{\rho} \frac{\partial u}{\partial \rho}+\frac{1}{\rho^{2}} \frac{\partial^{2} u}{\partial \theta^{2}}\right),} & {\rho<R, 0 \leq \theta \leq 2 \pi, t>0} \\
+{u(\rho, \theta, 0)=\varphi(\rho, \theta),} & {\rho<R, 0 \leq \theta \leq 2 \pi} \\
+{u(R, \theta, t)=0,} & {0 \leq \theta \leq 2 \pi, t>0}
+\end{array}\right.\\
+\end{aligned}
+\end{equation}\par
+n阶贝塞尔函数
+\begin{equation}
+\begin{aligned}
+&\left\{\begin{array}{l}
+{x^{2} y^{\prime \prime}+x y^{\prime}+\left(x^{2}-n^{2}\right) y=0, \quad x<\sqrt{\lambda} R} \\
+{y(\sqrt{\lambda} R)=0,|y(0)|<\infty}
+\end{array}\right.\\
+\end{aligned}
+\end{equation}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%贝塞尔方程的求解
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{贝塞尔方程的求解}
+n阶贝塞尔方程n任意实数或复数
+$$\color{red}{x^{2} y^{\prime \prime}+x y^{\prime}+\left(x^{2}-n^{2}\right) y=0}$$\par
+假设$n\geq0$，令：
+$$y=x^{c}(a_{0}+a_{1}x+a_{2}x^{2}+\cdots+a_{k}x^{k}+\cdots)=\sum_{k=0}^{\infty}a_{k}x^{c+k}$$
+$$\sum_{k=0}^{\infty}\left\{\left[(c+k)(c+k-1)+(c+k)+(x^{2}-n^{2})\right]a_{k}x^{c+k}\right\}=0$$
+$$(c^{2}-n^{2})a_{0}x^{c}+\left[(c+1)^{2}-n^{2}\right]+\sum_{k=0}^{\infty}\left\{\left[(c+k)^{2}-n^{2}\right]a_{k}+a_{k-2}\right\}x^{c+k}=0$$
+从而有
+$$(c^{2}-n^{2})a_{0}=0$$
+$$\left[(c+1)^{2}-n^{2}\right]a_{1}=0$$
+$$\left[(c+k)^{2}-n^{2}\right]a_{k}+a_{k-2}=0$$
+由上三式可得
+$$c=n$$
+$$a_{1}=a_{3}=a_{5}=\cdots=0$$
+$$a_{k}=\frac{-a_{k-2}}{k(2n+k)}$$
+令：
+$$a_{0}=\frac{1}{2^{n}\Gamma(n+1)}$$
+$$\Gamma(p)=\int_{0}^{\infty}e^{-x}x^{p-1}dx$$
+$$\Gamma(p+1)=p\Gamma(p)$$
+$$\Gamma(1)=1$$
+$$\Gamma(1/2)=\sqrt{\pi}$$
+当p为正整数时
+$$\Gamma(p+1)=p!$$
+当p为负整数或零时
+$$\Gamma(p)\rightarrow\infty$$
+$$a_{2m}=\frac{(-1)^{m}}{2^{n+2m}m!\Gamma(n+m+1)}\ \ \ \ n\geq0$$
+n阶第一类贝塞尔函数
+$$\color{red}{J_{n}(x)=\sum_{m=0}^{\infty}\frac{(-1)^{m}}{m!\Gamma(n+m+1)}\left(\frac{x}{2}\right)^{n+2m}}\ \ \ \ \ n\geq0$$
+当n为正整数时$\Gamma(n+m+1)=(n+m)!$
+$$J_{n}(x)=\sum_{m=0}^{\infty}\frac{(-1)^{m}}{m!(n+m)!}\left(\frac{x}{2}\right)^{n+2m}\ \ \ \ \ n=0,1,2\cdots$$
+$c=-n$时
+$$J_{-n}(x)=\sum_{m=0}^{\infty}\frac{(-1)^{m}}{m!\Gamma(-n+m+1)!}\left(\frac{x}{2}\right)^{-n+2m}\ \ \ \ \ n\neq1,2\cdots$$
+n阶第一类贝塞尔函数
+$$\color{red}{J_{n}(x)=\sum_{m=0}^{\infty}\frac{(-1)^{m}}{m!\Gamma(n+m+1)}\left(\frac{x}{2}\right)^{n+2m}}\ \ \ \ \ n\geq0$$
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%著名的贝塞尔展开公式
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{著名的贝塞尔展开公式}
+$$e^{izcos\theta}=\sum_{n=-\infty}^{\infty}i^{n}J_{n}(z)e^{in\theta}$$
+$$J_{-n}(z)=(-1)^{n}J_{n}(z)$$
+$$e^{izcos\theta}=J_{0}(z)+2\sum_{n=1}^{\infty}i^{n}J_{n}(z)cos(n\theta)$$
+$$cos(zcos\theta)=J_{0}(z)+2\sum_{n=1}^{\infty}(-1)^{n}J_{2n}(z)cos(2n\theta)$$
+$$sin(zcos\theta)=-2\sum_{n=1}^{\infty}(-1)^{n}J_{2n-1}(z)cos\left[(2n-1)\theta\right]$$
+$$cos(zsin\theta)=J_{0}(z)+2\sum_{n=1}^{\infty}J_{2n}(z)cos(2n\theta)$$
+$$sin(zsin\theta)=2\sum_{n=1}^{\infty}J_{2n-1}(z)sin\left[(2n-1)\theta\right]$$

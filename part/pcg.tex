@@ -1,0 +1,89 @@
+\chapter{PGC算法}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%PGC相位生成载波调制实现原理分析
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{PGC相位生成载波调制实现原理分析}
+干涉输出信号可以表示为
+\begin{equation}
+I=A+Bcos[Ccos(\omega_ot)+\varphi(t)]
+\label{pcg1}
+\end{equation}\par
+
+其中载波信号为$Ccos\omega_o t$,$\varphi(t)$为待测信号和环境漂移共同引起得相位变化。$Ccos\omega_o t+\varphi(t)$处于相位上，故将其看作相位变化，事实上载波信号和待测信号处于同等地位，由于载波频率远远高于待测信号，故可以认为它载着待测信号。这就体现了相位载波的含义。\par
+对于\ref{pcg1}进行贝塞尔函数展开得
+\begin{equation}
+\begin{aligned}
+I=&A+B\Bigg\{ \left[J_o(C)+2\sum_{k=1}^{\infty}(-1)^{k}J_{2k}(C)cos2k\omega_o t\right]cos\varphi(t) \\
+&-2 \left[\sum_{k=0}^{\infty}J_{2k+1}(C)cos(2k+1)\omega_{o}t\right]sin\varphi(t)  \Bigg\}
+\end{aligned}
+\label{pcg2}
+\end{equation}\par
+
+由式\ref{pcg2}可知，干涉输出信号I，当$\varphi(t)=0$时，信号I中只存在$\omega_o$的偶次谐波项；当$\varphi(t)=\pi/2$时，信号I中只存在$\omega_o$的奇次谐波项。$\varphi(t)$可以表示为
+\begin{equation}
+\varphi(t)=Dcos\omega_s t+\varphi_o(t)
+\end{equation}
+
+
+其中，$Dcos\omega_s t$为待测信号幅度，$\varphi_o(t)$为环境噪声引起的相位变化。同理，$cos\varphi(t)$、$sin\varphi(t)$按贝塞尔函数展开
+\begin{equation}
+\begin{aligned}
+cos\varphi(t)=&\left[J_o(D)+2\sum_{k=1}^{\infty}(-1)^{k}J_{2k}(D)cos2k\omega_s t\right]cos\varphi_o(t) \\
+&- \left[2\sum_{k=0}^{\infty}(-1)^{k}J_{2k+1}(D)cos(2k+1)\omega_{s}t\right]sin\varphi_o(t)
+\end{aligned}
+\label{pcg3}
+\end{equation}
+\begin{equation}
+\begin{aligned}
+sin\varphi(t)=&\left[J_o(C)+2\sum_{k=1}^{\infty}(-1)^{k}J_{2k}(C)cos2k\omega_o t\right]sin\varphi_o(t) \\
+&+2 \left[\sum_{k=0}^{\infty}(-1)^{k}J_{2k+1}(C)cos(2k+1)\omega_{o}t\right]cos\varphi_o(t)
+\end{aligned}
+\label{pcg4}
+\end{equation}\par
+
+
+由式\ref{pcg3}、\ref{pcg4}可以看出，当$\varphi_o(t)=k\pi(k=0,1,2\cdots)$时，输出干涉信号频谱中，偶（奇）次角频率$\omega_s$出现在偶（奇）次角频率$\omega_o$的两侧；当$\varphi_o(t)=k\pi+\pi/2(k=0,1,2\cdots)$时，频谱上偶（奇）次角频率$\omega_s$出现在奇（偶）次角频率$\omega_o$的两侧，待测信号的信息包含在奇（偶）次角频率$\omega_o$的两侧的边带频谱中，它们或以$\omega_o$偶次角频率，或以$\omega_o$奇次角频率为中心。从而实现了相位生成载波调制。\par
+未加载波调制前，当$\varphi(t)=k\pi(k=0,1,2\cdots)$时，$cos\varphi(t)=±1$；$\varphi(t)=k\pi+\pi/2(k=0,1,2\cdots)$时，$cos\varphi(t)=0$。此时干涉信号将发生消隐或畸变，无法从中解调将待测信号。根据以上分析，加入载波信号后，即使出现$\varphi_o(t)=k\pi$或$\varphi(t)=k\pi+\pi/2$也不会发生信号的消隐或畸变，从而实现抗相位衰落。这就是进行相位生成载波调制的原因和意义所在。
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%PGC解调算法原理分析及相关参数选取
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{PGC解调算法原理分析及相关参数选取}
+传统的PGC解调算法分为微分交叉相乘（DCM）算法和反正切（ Arctan）算法两种。以下将分别对两种解调算法进行详细分析，并分别对两种算法中的一些参数的选取原则进行详细的理论分析，如最佳相位调制度的选取、系统最低采样频率及系统解调动态范围上限等。
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%PGC解调算法原理分析
+\subsection{PGC解调算法原理分析}
+DCM解调算法的思路是将干涉信号分别与单倍频和二倍频混频低通滤波后，得到一对相互正交的余弦项和正弦项，然后再经过微分交叉相乘相减、积分、高通滤波后实现待测信号的解调。具体过程如下：干涉信号分别与幅度分别为G、H，角频率为$\omega_o$和$2\omega_o$的载波混频、低通滤波后得到
+\begin{equation}
+-B G J_{1}(C) \sin \varphi(t)
+\label{pcg6}
+\end{equation}
+\begin{equation}
+-B H J_{2}(C) \cos \varphi(t)
+\label{pcg7}
+\end{equation}\par
+
+
+经过微分交叉相乘相减积分处理后的信号为
+\begin{equation}
+B^{2} G H J_{1}(C) J_{2}(C) \varphi(t)
+\end{equation}\par
+
+
+再通过高通滤波器得到了待测信号，即DCM算法解调输出为
+\begin{equation}
+D B^{2} G H J_{1}(C) J_{2}(C) \cos \omega_{s}t
+\end{equation}\par
+
+
+待测信号被解调出来，只是幅值变化了一个系数$B^{2}GHJ_{1}(C) J_{2}(C)$。为了减小输出结果对贝塞尔函数的依赖关系，通过选择适当的载波信号幅度即相位调制度C，使得$J_1(C)J_2(C)$取得极大值，且当C值稍有变化时系统解调输出幅值变化不大，再可以通过幅度补偿实现待测信号的完全解调。\par
+Arctan算法与DCM算法相同之处在于：二者都是分别与单倍频和二倍频混频低通滤波后得到两个相互正交的余弦项和正弦项。不同之处在于：反正切算法是将得到的两个正交项进行除法运算得到正切信号，然后对正切信号进行反正切算法，最后经过高通滤波实现信号的解调。\par
+具体分析过程如下：干涉信号与载波混频低通后得到的正交项如式\ref{pcg6}、\ref{pcg7}，对两式相除后得到
+\begin{equation}
+GJ_1(C)/HJ_2(C)\cdot tan\varphi(t)
+\end{equation}
+
+
+求反正切再经高通滤波后得到
+\begin{equation}
+GJ_{1}(C)/HJ_{2}(C)\cdot Dcos\omega_{s}t
+\end{equation}\par
+
+
+实现对待测信号的解调。
