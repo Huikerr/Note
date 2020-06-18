@@ -1,0 +1,14 @@
+\contentsline {chapter}{\numberline {1}PGC算法}{1}{chapter.1}% 
+\contentsline {section}{\numberline {1.1}PGC相位生成载波调制实现原理分析}{1}{section.1.1}% 
+\contentsline {section}{\numberline {1.2}PGC解调算法原理分析及相关参数选取}{2}{section.1.2}% 
+\contentsline {subsection}{\numberline {1.2.1}PGC解调算法原理分析}{2}{subsection.1.2.1}% 
+\contentsline {chapter}{\numberline {2}基于波数扫描的傅立叶变换白光干涉测量术}{4}{chapter.2}% 
+\contentsline {section}{\numberline {2.1}光纤白光干涉光谱信号在波长域上的啁啾特性}{4}{section.2.1}% 
+\contentsline {section}{\numberline {2.2}基于波数扫描的傅立叶变换白光干涉测量术 }{4}{section.2.2}% 
+\contentsline {subsection}{\numberline {2.2.1}波数域傅立叶变换白光干涉测量原理 }{4}{subsection.2.2.1}% 
+\contentsline {chapter}{\numberline {3}贝塞尔函数}{5}{chapter.3}% 
+\contentsline {section}{\numberline {3.1}贝塞尔函数的引出}{5}{section.3.1}% 
+\contentsline {section}{\numberline {3.2}贝塞尔方程的求解}{5}{section.3.2}% 
+\contentsline {section}{\numberline {3.3}著名的贝塞尔展开公式}{6}{section.3.3}% 
+\contentsline {chapter}{\numberline {4}傅里叶变换解调原理研究}{8}{chapter.4}% 
+\contentsline {section}{\numberline {4.1}高斯函数的傅里叶变换}{9}{section.4.1}% 
